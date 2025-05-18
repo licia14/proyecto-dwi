@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal de Colaborador</title>
+    <h:outputStylesheet library="css" name="control_colaborador_styles.css" />
+</h:head>
+<h:body>
+
+    <!-- Encabezado y navegación -->
+    <header class="header">
+                <!-- Barra Superior -->
+            <div class="top-bar">
+                <!-- Logo -->
+                <div class="logo">
+                    <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" />
+                    <!-- Barra de Navegación -->
+                    <nav class="nav-simple">
+                        <ul>
+                            <li><a href="#{request.contextPath}/faces/colaborador/perfil_colaborador.xhtml">Mi Perfil</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Información del Usuario -->
+                <h:form id="cerrarSesionForm">
+                    <div class="user-info">
+                        <h:panelGroup rendered="#{colaboradorSesionBean.colaboradorAutenticado}">
+                            <span>Bienvenido, #{colaboradorSesionBean.colaborador.nombreColaborador}</span>
+                            <h:commandLink value="Cerrar Sesión" action="#{loginBean.cerrarSesion}" />
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Barra de Navegación -->
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#{request.contextPath}/faces/colaborador/portal_colaborador.xhtml">Inicio</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_cliente.xhtml">Clientes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_colaborador.xhtml">Colaboradores</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_dashboard.xhtml">Dashboard</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_solicitud.xhtml">Solicitudes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_asignacion.xhtml">Asignaciones</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_actividad.xhtml">Actividades</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_rol.xhtml">Rol</a></li>
+                </ul>
+            </nav>
+    </header>
+    <br/><br/>
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <h1>Hola, #{colaboradorSesionBean.colaborador.nombreColaborador} #{colaboradorSesionBean.colaborador.apellidos}!</h1>
+        <h1 class="page-title">
+            Bienvenido a tu Portal de Colaborador
+        </h1>
+        <br/>
+        <p class="welcome-message">Aquí podrás realizar todas las acciones relacionadas con la gestión de clientes, colaboradores, roles, y acceder a reportes de tu dashboard.</p>
+
+        <!-- Acciones principales -->
+        <div class="actions-container">
+            <a class="action-button">Gestión de Clientes</a>
+            <a class="action-button">Gestión de Colaboradores</a>
+            <a class="action-button">Dashboard</a>
+            <a class="action-button">Solicitudes</a>
+            <a class="action-button">Gestión de Roles</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+    </footer>
+    
+    <style>
+        /* Main Content */
+        .main-content {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .welcome-message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Acciones principales */
+        .actions-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .action-button {
+            background-color: #D0E8F2; /* Botón azul claro */
+            color: #456268; /* Texto oscuro */
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-button:hover {
+            background-color: #79A3B1; /* Botón azul más oscuro al hover */
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .action-button:active {
+            transform: translateY(1px);
+        }
+        
+        
+
+    </style>
+</h:body>
+</html>

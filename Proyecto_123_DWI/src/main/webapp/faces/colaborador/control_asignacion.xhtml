@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Crear Asignación</title>
+    <h:outputStylesheet library="css" name="control_colaborador_styles.css" />
+    <h:outputStylesheet library="css" name="control_colaborador_asignacion.css" />
+</h:head>
+<h:body>
+    <!-- Encabezado y navegación -->
+    <header class="header">
+                <!-- Barra Superior -->
+            <div class="top-bar">
+                <!-- Logo -->
+                <div class="logo">
+                    <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" />
+                    <!-- Barra de Navegación -->
+                    <nav class="nav-simple">
+                        <ul>
+                            <li><a href="#{request.contextPath}/faces/colaborador/perfil_colaborador.xhtml">Mi Perfil</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Información del Usuario -->
+                <h:form id="cerrarSesionForm">
+                    <div class="user-info">
+                        <h:panelGroup rendered="#{colaboradorSesionBean.colaboradorAutenticado}">
+                            <span>Bienvenido, #{colaboradorSesionBean.colaborador.nombreColaborador}</span>
+                            <h:commandLink value="Cerrar Sesión" action="#{loginBean.cerrarSesion}" />
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Barra de Navegación -->
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#{request.contextPath}/faces/colaborador/portal_colaborador.xhtml">Inicio</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_cliente.xhtml">Clientes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_colaborador.xhtml">Colaboradores</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_dashboard.xhtml">Dashboard</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_solicitud.xhtml">Solicitudes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_asignacion.xhtml">Asignaciones</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_actividad.xhtml">Actividades</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_rol.xhtml">Rol</a></li>
+                </ul>
+            </nav>
+    </header>
+    <br/>
+    
+    <div class="main-container">
+        <h1>Crear Nueva Asignación</h1>
+        <br/><br/>
+        <!-- Formulario de asignaciones -->
+        <h:form id="formCrearAsignacion">
+            <!-- Información de la solicitud seleccionada -->
+            <div class="section" rendered="#{not empty asignacionBean.solicitudSeleccionada}">
+                <h2>Información de la Solicitud</h2>
+                <p><strong>ID Solicitud:</strong> #{asignacionBean.solicitudSeleccionada.idSolicitud}</p>
+                <p><strong>Número de Solicitud:</strong> #{asignacionBean.solicitudSeleccionada.nroSolicitud}</p>
+                <p><strong>Cliente:</strong> #{asignacionBean.solicitudSeleccionada.cliente.nombreCliente}</p>
+                <p><strong>Motivo:</strong> #{asignacionBean.solicitudSeleccionada.motivo}</p>
+                <p><strong>Detalles:</strong> #{asignacionBean.solicitudSeleccionada.detalles}</p>
+            </div>
+            <br/><br/>
+            <!-- Selección de colaboradores -->
+            <div class="section">
+                <h2>Seleccionar Colaboradores</h2>
+                <h:dataTable value="#{asignacionBean.colaboradoresDisponibles}" var="colaborador" styleClass="table">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{colaborador.idColaborador}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Nombre</f:facet>
+                        #{colaborador.nombreColaborador}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Acción</f:facet>
+                        <h:commandButton value="Agregar" action="#{asignacionBean.agregarColaborador(colaborador)}">
+                            <f:ajax render="formCrearAsignacion" />
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+            </div>
+            <br/><br/>
+            <!-- Colaboradores Seleccionados -->
+            <div class="section">
+                <h2>Colaboradores Seleccionados</h2>
+                <h:dataTable value="#{asignacionBean.colaboradoresSeleccionados}" var="colaborador" styleClass="table">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{colaborador.idColaborador}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Nombre</f:facet>
+                        #{colaborador.nombreColaborador}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Coordinador</f:facet>
+                        <h:commandButton value="Seleccionar"
+                                         action="#{asignacionBean.establecerCoordinadorSeleccionado(colaborador)}">
+                            <f:ajax execute="@this" render="formCrearAsignacion" />
+                        </h:commandButton>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Acción</f:facet>
+                        <h:commandButton value="Eliminar" action="#{asignacionBean.eliminarColaborador(colaborador)}">
+                            <f:ajax render="formCrearAsignacion" />
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+            </div>
+            <!-- Botones de acción -->
+            <div class="buttons">
+                <h:commandButton value="Guardar Asignación" action="#{asignacionBean.guardarAsignacion}" styleClass="button-save">
+                    <f:ajax execute="@form" render="formCrearAsignacion misAsignaciones" />
+                </h:commandButton>
+                <h:commandButton value="Cancelar" action="#{asignacionBean.resetFormulario}" styleClass="button-cancel">
+                    <f:ajax execute="@form" render="formCrearAsignacion" />
+                </h:commandButton>
+            </div>
+        </h:form>
+        <br/><br/>
+        <!-- Mis Asignaciones -->
+        <div class="section" id="misAsignaciones">
+             <h2>Mis Asignaciones</h2>
+                <h:panelGroup rendered="#{empty asignacionBean.obtenerMisAsignaciones()}">
+                    <p>No tienes asignaciones pendientes.</p>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{not empty asignacionBean.obtenerMisAsignaciones()}">
+                    <h:form id="formMisAsignaciones">
+                        <h:dataTable value="#{asignacionBean.obtenerMisAsignaciones()}" var="asignacion" styleClass="table">
+                            <h:column>
+                                <f:facet name="header">ID Solicitud</f:facet>
+                                #{asignacion.solicitud.idSolicitud}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Motivo</f:facet>
+                                #{asignacion.solicitud.motivo}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Rol</f:facet>
+                                <h:outputText value="#{asignacion.esCoordinador ? 'Coordinador' : 'Colaborador'}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Fecha Asignación</f:facet>
+                                #{asignacion.fechaAsignacion}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Actividades</f:facet>
+                                <h:commandButton value="Ver Detalles" action="control_actividad.xhtml?faces-redirect=true">
+                                    <f:setPropertyActionListener target="#{actividadBean.solicitudSeleccionada}" value="#{asignacion.solicitud}" />
+                                </h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                        
+                        <h:commandButton value="Finalizar" 
+                                        action="#{asignacionBean.finalizarAsignacion(asignacion)}" 
+                                        rendered="#{asignacion.esCoordinador}">
+                           <f:ajax execute="@this" render=":tablaSolicitudesPendientes :tablaSolicitudesEnProceso :tablaSolicitudesFinalizadas" />
+                        </h:commandButton> 
+                    </h:form>
+                </h:panelGroup>
+        </div>
+    </div>
+    <br/><br/>
+    <br/><br/>
+    <br/><br/>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+    </footer>
+</h:body>
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="https://jakarta.ee/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="https://jakarta.ee/xml/ns/javaee https://jakarta.ee/xml/ns/javaee/web-facesconfig_4_0.xsd"
+              version="4.0">
+
+    <!-- Configuración para la internacionalización -->
+    <application>
+        <resource-bundle>
+            <base-name>resources.messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+    </application>
+</faces-config>
+
+
+

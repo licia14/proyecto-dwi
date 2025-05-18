@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear Solicitud</title>
+    <h:outputStylesheet library="css" name="styles.css" />
+    <h:outputStylesheet library="css" name="control_cliente_styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+</h:head>
+<h:body>
+    
+     <header class="bg-blue-500 p-4 text-black flex justify-between items-center">
+        <!-- Logo y navegación -->
+        <div class="flex items-center space-x-4">
+            <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" styleClass="w-16 h-16" />
+            <nav class="flex space-x-4">
+                <h:link outcome="/faces/cliente/portal_cliente.xhtml" value="Inicio" styleClass="hover:text-gray-700 font-bold" />
+                <h:link outcome="/faces/cliente/mis_solicitudes.xhtml" value="Mis Solicitudes" styleClass="hover:text-gray-700 font-bold" />
+                <h:link outcome="/faces/cliente/perfil_cliente.xhtml" value="Mi Perfil" styleClass="hover:text-gray-700 font-bold" />
+                <h:link outcome="/faces/cliente/contacto_cliente.xhtml" value="Contacto" styleClass="hover:text-gray-700 font-bold" />
+            </nav>
+        </div>
+
+        <!-- Información del cliente -->
+        <h:form id="cerrarSesionForm">
+            <div class="flex items-center space-x-4">
+                <h:panelGroup rendered="#{clienteSesionBean.clienteAutenticado}">
+                    <span class="font-bold">Bienvenido, #{clienteSesionBean.cliente.nombreCliente} | </span>
+                    <h:commandLink value="Cerrar Sesión" 
+                                   action="#{loginBean.cerrarSesion}" 
+                                   immediate="true" 
+                                   styleClass="text-white-600 hover:underline" />
+                </h:panelGroup>
+            </div>
+        </h:form>
+    </header>
+    <br/><br/>
+
+      <!-- Mensajes de validación -->
+    <h:messages globalOnly="true" style="color: red;" />
+    
+    <h1>Crear Solicitud</h1>
+    
+    <!-- Formulario de solicitud -->
+    <h:form id="formCrearSolicitud" enctype="multipart/form-data">
+            <!-- Motivo -->
+            <h:outputLabel for="motivo" value="Motivo:" />
+                <h:selectOneMenu id="motivo" value="#{solicitudClienteBean.solicitud.motivo}" required="true">
+                    <f:selectItem itemValue="" itemLabel="Seleccione un motivo" noSelectionOption="true" />
+                    <f:selectItem itemValue="Requerimiento" itemLabel="Requerimiento de Software" />
+                    <f:selectItem itemValue="Capacitacion" itemLabel="Curso de Capacitacion" />
+                    <f:selectItem itemValue="Error de Software" itemLabel="Reporte de Error" />
+                </h:selectOneMenu>
+            <h:message for="motivo" style="color: red;" />
+
+            <!-- Detalles -->
+            <h:outputLabel for="detalles" value="Detalles:" />
+            <h:inputTextarea id="detalles" value="#{solicitudClienteBean.solicitud.detalles}" rows="5" cols="30" required="true" />
+            <h:message for="detalles" style="color: red;" />
+
+            <!-- Subir Imagen -->
+            <h:outputLabel for="imagenFile" value="Subir Imagen (opcional):" />
+            <h:inputFile id="imagenFile" value="#{solicitudClienteBean.imagenFile}" />
+            <h:message for="imagenFile" style="color: red;" />
+
+            <!-- Botón para registrar -->
+            <h:commandButton value="Registrar Solicitud" action="#{solicitudClienteBean.registrarSolicitud}" />
+        </h:form>
+      <br/><br/>
+     <!-- Footer -->
+    <footer class="footer">
+        <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+    </footer>
+     
+     <style>
+        /* Estilo para el h1 */
+h1 {
+    font-size: 2.5rem; /* Tamaño grande y legible */
+    font-weight: bold; /* Texto negrita */
+    text-align: center; /* Centrado horizontalmente */
+    color: #1a202c; /* Color oscuro */
+    margin: 20px 0; /* Separación vertical */
+}
+         /* Estilo general del formulario */
+form#formCrearSolicitud {
+    background-color: #f9f9f9; /* Fondo claro */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde sutil */
+    border-radius: 8px; /* Bordes redondeados */
+    max-width: 600px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centrar el formulario */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+/* Estilo para las etiquetas */
+form#formCrearSolicitud h\\:outputLabel {
+    display: block; /* Mostrar cada etiqueta en línea separada */
+    font-weight: bold; /* Texto en negrita */
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el campo */
+    color: #333; /* Color oscuro */
+}
+
+/* Estilo para los inputs, select y textarea */
+form#formCrearSolicitud input,
+form#formCrearSolicitud select,
+form#formCrearSolicitud textarea {
+    width: 100%; /* Campo del ancho completo */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 15px; /* Espaciado inferior */
+    border: 1px solid #ccc; /* Borde claro */
+    border-radius: 4px; /* Bordes redondeados */
+    font-size: 1rem; /* Tamaño de fuente legible */
+    box-sizing: border-box; /* Incluir padding y border dentro del tamaño */
+}
+
+/* Estilo para el botón */
+form#formCrearSolicitud h\\:commandButton {
+    display: block; /* Bloque para centrarlo */
+    width: 100%; /* Ancho completo */
+    padding: 10px; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    color: #fff; /* Texto blanco */
+    background-color: #007bff; /* Fondo azul */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Manito al pasar el mouse */
+    transition: background-color 0.3s ease; /* Animación en hover */
+}
+
+/* Botón al pasar el mouse */
+form#formCrearSolicitud h\\:commandButton:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+}
+
+/* Estilo para los mensajes de error */
+form#formCrearSolicitud h\\:message {
+    font-size: 0.875rem; /* Tamaño de fuente pequeño */
+    color: red; /* Color rojo para los mensajes de error */
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+    </style>
+</h:body>
+</html>

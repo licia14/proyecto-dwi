@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control de Colaboradores</title>
+    <h:outputStylesheet library="css" name="control_colaborador_styles.css" />
+</h:head>
+<h:body class="page-body">
+
+    <!-- Encabezado y navegación -->
+    <header class="header">
+                <!-- Barra Superior -->
+            <div class="top-bar">
+                <!-- Logo -->
+                <div class="logo">
+                    <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" />
+                    <!-- Barra de Navegación -->
+                    <nav class="nav-simple">
+                        <ul>
+                            <li><a href="#{request.contextPath}/faces/colaborador/perfil_colaborador.xhtml">Mi Perfil</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Información del Usuario -->
+                <h:form id="cerrarSesionForm">
+                    <div class="user-info">
+                        <h:panelGroup rendered="#{colaboradorSesionBean.colaboradorAutenticado}">
+                            <span>Bienvenido, #{colaboradorSesionBean.colaborador.nombreColaborador}</span>
+                            <h:commandLink value="Cerrar Sesión" action="#{loginBean.cerrarSesion}" />
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Barra de Navegación -->
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#{request.contextPath}/faces/colaborador/portal_colaborador.xhtml">Inicio</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_cliente.xhtml">Clientes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_colaborador.xhtml">Colaboradores</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_dashboard.xhtml">Dashboard</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_solicitud.xhtml">Solicitudes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_asignacion.xhtml">Asignaciones</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_actividad.xhtml">Actividades</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_rol.xhtml">Rol</a></li>
+                </ul>
+            </nav>
+    </header>
+    <br/><br/>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <h2 class="section-title">Gestión de Colaboradores</h2>
+        <!-- Botón para crear nuevo colaborador -->
+        <div class="button-container">
+            <h:form>
+                <h:commandButton value="Crear Nuevo Colaborador"
+                                 action="registro_colaborador?faces-redirect=true"
+                                 styleClass="custom-button" 
+                                 rendered="#{colaboradorSesionBean.colaborador.rol.nombreRol eq 'Administrador'}"/>
+            </h:form>
+        </div>
+        <br/>
+        <!-- Tabla de colaboradores -->
+        <h:dataTable value="#{colaboradorRegistroBean.colaboradores}" var="colaborador"
+                     styleClass="data-table">
+            <!-- ID -->
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                <h:outputText value="#{colaborador.idColaborador}" />
+            </h:column>
+            <!-- Nombre -->
+            <h:column>
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText value="#{colaborador.nombreColaborador}" />
+            </h:column>
+            <!-- Apellidos -->
+            <h:column>
+                <f:facet name="header">Apellidos</f:facet>
+                <h:outputText value="#{colaborador.apellidos}" />
+            </h:column>
+            <!-- DNI -->
+            <h:column>
+                <f:facet name="header">DNI</f:facet>
+                <h:outputText value="#{colaborador.dni}" />
+            </h:column>
+            <!-- Correo -->
+            <h:column>
+                <f:facet name="header">Correo</f:facet>
+                <h:outputText value="#{colaborador.correo}" />
+            </h:column>
+            <!-- Contraseña -->
+            <h:column>
+                <f:facet name="header">Contraseña</f:facet>
+                <h:outputText value="*********************" />
+            </h:column>
+            <!-- Salt -->
+            <h:column>
+                <f:facet name="header">Salt</f:facet>
+                <h:outputText value="*********************" />
+            </h:column>
+            <!-- Fecha de Registro -->
+            <h:column>
+                <f:facet name="header">Fecha de Registro</f:facet>
+                <h:outputText value="#{colaborador.fechaRegistro}" />
+            </h:column>
+            <!-- Dirección -->
+            <h:column>
+                <f:facet name="header">Dirección</f:facet>
+                <h:outputText value="#{colaborador.direccion}" />
+            </h:column>
+            <!-- Teléfono -->
+            <h:column>
+                <f:facet name="header">Teléfono</f:facet>
+                <h:outputText value="#{colaborador.telefono}" />
+            </h:column>
+            <!-- Foto de Perfil -->
+            <h:column>
+                <f:facet name="header">Foto de Perfil</f:facet>
+                <h:graphicImage value="#{colaborador.fotoPerfil}" style="width: 50px; height: 50px;" />
+            </h:column>
+            <!-- Rol -->
+            <h:column>
+                <f:facet name="header">Rol</f:facet>
+                <h:outputText value="#{colaborador.rol.nombreRol}" />
+            </h:column>
+        </h:dataTable>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+    </footer>
+</h:body>
+</html>

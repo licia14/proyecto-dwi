@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Gestión de Roles</title>
+     <h:outputStylesheet library="css" name="control_colaborador_styles.css" />
+    <h:outputStylesheet library="css" name="control_colaborador_rol.css" />
+</h:head>
+<h:body>
+
+    <!-- Encabezado y navegación -->
+    <header class="header">
+                <!-- Barra Superior -->
+            <div class="top-bar">
+                <!-- Logo -->
+                <div class="logo">
+                    <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" />
+                    <!-- Barra de Navegación -->
+                    <nav class="nav-simple">
+                        <ul>
+                            <li><a href="#{request.contextPath}/faces/colaborador/perfil_colaborador.xhtml">Mi Perfil</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Información del Usuario -->
+                <h:form id="cerrarSesionForm">
+                    <div class="user-info">
+                        <h:panelGroup rendered="#{colaboradorSesionBean.colaboradorAutenticado}">
+                            <span>Bienvenido, #{colaboradorSesionBean.colaborador.nombreColaborador}</span>
+                            <h:commandLink value="Cerrar Sesión" action="#{loginBean.cerrarSesion}" />
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Barra de Navegación -->
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#{request.contextPath}/faces/colaborador/portal_colaborador.xhtml">Inicio</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_cliente.xhtml">Clientes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_colaborador.xhtml">Colaboradores</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_dashboard.xhtml">Dashboard</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_solicitud.xhtml">Solicitudes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_asignacion.xhtml">Asignaciones</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_actividad.xhtml">Actividades</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_rol.xhtml">Rol</a></li>
+                </ul>
+            </nav>
+    </header>
+    <br/><br/>
+
+    <!-- Contenedor Principal -->
+    <div class="max-w-5xl mx-auto bg-white p-6 rounded shadow-md">
+        <h2 class="text-2xl font-bold text-center mb-6">Gestión de Roles</h2>
+
+        <!-- Formulario de creación/actualización -->
+        <div class="roles-page">
+            <h:form id="formRoles">
+                <h3 class="form-title">Nuevo/Actualizar Rol</h3>
+                <div class="roles-container">
+                    <!-- Campo: Nombre del Rol -->
+                    <div class="form-group">
+                        <h:outputLabel for="nombreRol" value="Nombre del Rol:" class="form-label" />
+                        <h:inputText id="nombreRol" value="#{rolBean.rol.nombreRol}" class="form-input" />
+                        <h:message for="nombreRol" class="form-error" />
+                    </div>
+                    <br/>
+                    <!-- Campo: Descripción -->
+                    <div class="form-group">
+                        <h:outputLabel for="descripcion" value="Descripción:" class="form-label" />
+                        <h:inputTextarea id="descripcion" value="#{rolBean.rol.descripcion}" class="form-textarea" />
+                        <h:message for="descripcion" class="form-error" />
+                    </div>
+                    <br/>
+                    <!-- Botones -->
+                    <div class="form-buttons">
+                        <h:commandButton value="Guardar" action="#{rolBean.guardarRol}"  class="button button-save" />
+                        <h:commandButton value="Cancelar" action="#{rolBean.limpiarFormulario}" class="button button-cancel" />
+                    </div>
+                </div>
+            </h:form>
+        </div>
+        <br/><br/>
+
+        <!-- Tabla de roles -->
+        <h:form id="tablaRoles">
+            <center><h3 class="text-xl font-semibold mt-8 mb-4">Lista de Roles</h3></center>
+            <h:dataTable value="#{rolBean.listaRoles}" var="rol" styleClass="table-auto w-full border border-gray-300 border-collapse">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    #{rol.idRol}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nombre</f:facet>
+                    #{rol.nombreRol}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Descripción</f:facet>
+                    #{rol.descripcion}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Acciones</f:facet>
+                    <div class="flex space-x-2">
+                        <!-- Botón para eliminar rol -->
+                        <h:commandButton value="Eliminar"
+                                         action="#{rolBean.eliminarRol(rol)}"
+                                         styleClass="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600" />
+                    </div>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </div>
+    <br/><br/><br/><br/>
+    <br/><br/><br/><br/>
+    
+     <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-20 text-center">
+        <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+    </footer>
+</h:body>
+</html>

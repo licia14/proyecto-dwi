@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Crear Asignación</title>
+    <h:outputStylesheet library="css" name="control_colaborador_styles.css" />
+    <h:outputStylesheet library="css" name="control_colaborador_asignacion.css" />
+</h:head>
+<h:body>
+    <!-- Encabezado y navegación -->
+    <header class="header">
+                <!-- Barra Superior -->
+            <div class="top-bar">
+                <!-- Logo -->
+                <div class="logo">
+                    <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" />
+                    <!-- Barra de Navegación -->
+                    <nav class="nav-simple">
+                        <ul>
+                            <li><a href="#{request.contextPath}/faces/colaborador/perfil_colaborador.xhtml">Mi Perfil</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Información del Usuario -->
+                <h:form id="cerrarSesionForm">
+                    <div class="user-info">
+                        <h:panelGroup rendered="#{colaboradorSesionBean.colaboradorAutenticado}">
+                            <span>Bienvenido, #{colaboradorSesionBean.colaborador.nombreColaborador}</span>
+                            <h:commandLink value="Cerrar Sesión" action="#{loginBean.cerrarSesion}" />
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Barra de Navegación -->
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#{request.contextPath}/faces/colaborador/portal_colaborador.xhtml">Inicio</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_cliente.xhtml">Clientes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_colaborador.xhtml">Colaboradores</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_dashboard.xhtml">Dashboard</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_solicitud.xhtml">Solicitudes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_asignacion.xhtml">Asignaciones</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_actividad.xhtml">Actividades</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_rol.xhtml">Rol</a></li>
+                </ul>
+            </nav>
+    </header>
+    <br/>
+        
+    
+    <h:form style="width: 80%; margin: auto;">
+    <div class="perfil-container">
+        <!-- Bloque de la foto -->
+        <div class="foto-seccion">
+            <h:graphicImage library="images" name="foto_perfil_default.jpg" 
+                            alt="Foto de Perfil"
+                            style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" />
+
+            <h:outputText value="Foto de perfil" 
+                          style="display: block; margin-top: 10px; font-weight: bold;" />
+        </div>
+
+        <!-- Bloque de datos -->
+        <div class="datos-seccion">
+            <h:panelGrid columns="2" cellpadding="5" styleClass="datos-grid">
+                <h:outputLabel value="ID del Colaborador:" />
+                <h:outputText value="#{colaboradorSesionBean.colaborador.idColaborador}" />
+
+                <h:outputLabel value="Nombre:" />
+                <h:outputText value="#{colaboradorSesionBean.colaborador.nombreColaborador}" />
+
+                <h:outputLabel value="Apellidos:" />
+                <h:outputText value="#{colaboradorSesionBean.colaborador.apellidos}" />
+
+                <h:outputLabel value="DNI:" />
+                <h:outputText value="#{colaboradorSesionBean.colaborador.dni}" />
+
+                <h:outputLabel value="Correo Electrónico:" />
+                <h:outputText value="#{colaboradorSesionBean.colaborador.correo}" />
+
+                <h:outputLabel value="Teléfono:" />
+                <h:outputText value="#{colaboradorSesionBean.colaborador.telefono}" />
+
+                <h:outputLabel value="Dirección:" />
+                <h:outputText value="#{colaboradorSesionBean.colaborador.direccion}" />
+
+                <h:outputLabel value="Fecha de Registro:" />
+                <h:outputText value="#{colaboradorSesionBean.colaborador.fechaRegistro}" />
+
+                <h:outputLabel value="Rol:" />
+                <h:outputText value="#{colaboradorSesionBean.colaborador.rol.nombreRol}" />
+
+            </h:panelGrid>
+
+
+            <!-- Botón único -->
+            <h:commandButton value="Actualizar Datos" action="actualizar_colaborador.xhtml?faces-redirect=true" styleClass="btn-actualizar-datos" />
+        </div>
+    </div>
+</h:form>
+ <!-- Footer -->
+    <footer class="footer">
+        <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+    </footer>
+
+
+        <style>
+        .perfil-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    align-items: center; /* Centra verticalmente los bloques */
+}
+
+.foto-seccion {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+}
+
+.foto-seccion img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.datos-seccion {
+    flex: 2;
+    padding: 10px;
+}
+
+.datos-grid {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.datos-grid label {
+    font-weight: bold;
+}
+
+.btn-actualizar-datos {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+}
+
+.btn-actualizar-datos:hover {
+    background-color: #0056b3;
+}
+
+
+        </style>
+    </h:body>
+</html>

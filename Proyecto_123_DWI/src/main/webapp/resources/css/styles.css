@@ -1,0 +1,203 @@
+/* Global Styles */
+.custom-body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.custom-h2 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.custom-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+/* Table Styles */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.custom-table th, .custom-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.custom-table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.custom-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.custom-table tr:hover {
+    background-color: #ddd;
+}
+
+/* Button Styles */
+.custom-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.custom-button:hover {
+    background-color: #45a049;
+}
+
+.custom-button.secondary {
+    background-color: #ddd;
+    color: black;
+}
+
+.custom-button.danger {
+    background-color: #e74c3c;
+}
+
+.custom-button.small {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+/* Form Styles */
+.custom-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-form label {
+    margin: 10px 0 5px;
+}
+
+.custom-form input[type="text"],
+.custom-form input[type="date"],
+.custom-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.custom-form textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+/* Success and Error Messages */
+.custom-message {
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.custom-message.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.custom-message.error {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Barra de navegación */
+.custom-header {
+    background-color: #3B82F6; /* Color azul llamativo */
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.custom-header .custom-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    margin-left: 20px;
+}
+
+.custom-header nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.custom-header nav ul li {
+    margin-right: 20px;
+}
+
+.custom-header nav ul li a {
+    color: white; /* Texto blanco */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.custom-header nav ul li a:hover {
+    background-color: #2563EB; /* Efecto de hover con un azul más oscuro */
+    color: white;
+}
+
+/* Ajustar el tamaño del contenedor de la barra para que no quede espacio vacío */
+.custom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* Permite que el contenido crezca para empujar el footer hacia abajo */
+}
+
+footer {
+    background-color: #1a202c;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+}
+.button-container {
+    text-align: right;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+button {
+    border-radius: 5px;
+    padding: 10px 15px;
+    background-color: #38a169; /* Verde */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2f855a; /* Verde más oscuro */
+}

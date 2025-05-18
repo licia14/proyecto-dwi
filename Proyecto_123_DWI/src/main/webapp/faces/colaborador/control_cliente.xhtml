@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Control de Clientes</title>
+    <h:outputStylesheet library="css" name="control_colaborador_styles.css" />
+</h:head>
+<h:body>
+    <!-- Encabezado y navegación -->
+    <header class="header">
+                <!-- Barra Superior -->
+            <div class="top-bar">
+                <!-- Logo -->
+                <div class="logo">
+                    <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" />
+                    <!-- Barra de Navegación -->
+                    <nav class="nav-simple">
+                        <ul>
+                            <li><a href="#{request.contextPath}/faces/colaborador/perfil_colaborador.xhtml">Mi Perfil</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Información del Usuario -->
+                <h:form id="cerrarSesionForm">
+                    <div class="user-info">
+                        <h:panelGroup rendered="#{colaboradorSesionBean.colaboradorAutenticado}">
+                            <span>Bienvenido, #{colaboradorSesionBean.colaborador.nombreColaborador}</span>
+                            <h:commandLink value="Cerrar Sesión" action="#{loginBean.cerrarSesion}" />
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Barra de Navegación -->
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#{request.contextPath}/faces/colaborador/portal_colaborador.xhtml">Inicio</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_cliente.xhtml">Clientes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_colaborador.xhtml">Colaboradores</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_dashboard.xhtml">Dashboard</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_solicitud.xhtml">Solicitudes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_asignacion.xhtml">Asignaciones</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_actividad.xhtml">Actividades</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_rol.xhtml">Rol</a></li>
+                </ul>
+            </nav>
+    </header>
+    <br/><br/>
+    
+    <main>
+        <h2>Gestión de Clientes</h2>
+        <br/><br/>
+        <h:dataTable value="#{clienteRegistroBean.clientes}" var="cliente" class="table">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                <h:outputText value="#{cliente.idCliente}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nombre de Entidad</f:facet>
+                <h:outputText value="#{cliente.nombreEntidad}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText value="#{cliente.nombreCliente}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Tipo de Documento</f:facet>
+                <h:outputText value="#{cliente.tipoDocumento}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Número de Documento</f:facet>
+                <h:outputText value="#{cliente.numDocumento}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Correo</f:facet>
+                <h:outputText value="#{cliente.correo}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Contraseña</f:facet>
+                <h:outputText value="**********************" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Fecha de Registro</f:facet>
+                <h:outputText value="#{cliente.fechaRegistro}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dirección</f:facet>
+                <h:outputText value="#{cliente.direccion}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Teléfono</f:facet>
+                <h:outputText value="#{cliente.telefono}" />
+            </h:column>
+            <!--
+            <h:column>
+                <f:facet name="header">Foto de Perfil</f:facet>
+                <h:outputText value="#{cliente.fotoPerfil}" />
+            </h:column>
+            -->
+        </h:dataTable>
+    </main>
+
+    <footer class="footer">
+        <p>&#169;copy; 2024 123digit@l. Todos los derechos reservados.</p>
+    </footer>
+</h:body>
+</html>

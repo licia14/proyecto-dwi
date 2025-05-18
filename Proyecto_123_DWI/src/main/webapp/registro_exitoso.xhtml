@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Registro Exitoso</title>
+        
+        <!-- Redirección automática en 5 segundos -->
+        <meta http-equiv="refresh" content="5;url=/Proyecto_123_DWI/login.xhtml" />
+
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .container {
+                background-color: white;
+                padding: 20px 40px;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                text-align: center;
+                max-width: 400px;
+                width: 100%;
+            }
+
+            .success-title {
+                color: #4CAF50;
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .success-message {
+                color: #555;
+                margin-bottom: 20px;
+                font-size: 16px;
+            }
+
+            .redirect-message {
+                font-size: 14px;
+                color: #777;
+            }
+
+            .redirect-message span {
+                color: #4CAF50;
+                font-weight: bold;
+            }
+
+            .btn {
+                display: inline-block;
+                margin-top: 20px;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+            }
+
+            .btn:hover {
+                background-color: #45a049;
+            }
+
+            
+        </style>
+    </h:head>
+    <h:body class="bg-gray-100 text-center py-20">
+        <div class="max-w-lg mx-auto bg-white p-8 shadow-lg rounded-lg fade-in">
+            <div class="flex justify-center items-center space-x-3 fade-in">
+               <svg class="w-4 h-4 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <h1 class="text-3xl font-bold text-green-500">¡Registro Exitoso!</h1>
+            </div>
+            <p class="mt-4 text-lg text-gray-700 fade-in">
+                Tu registro ha sido exitoso. Revisa tu correo para completar la verificación.
+            </p>
+            <p class="mt-4 text-sm text-gray-600 fade-in" aria-live="polite">
+                Serás redirigido automáticamente en <span id="countdown" class="font-bold text-blue-600">5</span> segundos...
+            </p>
+            <!-- Botón opcional para ir manualmente -->
+            <a href="/Proyecto_123_DWI/login.xhtml" class="mt-6 inline-block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105" aria-label="Iniciar sesión">
+                Ir al Login
+            </a>
+        </div>
+        
+        <!-- JavaScript -->
+        <script type="text/javascript">
+            // Temporizador para actualizar la cuenta regresiva
+            var countdownElement = document.getElementById('countdown');
+            var seconds = 5;
+            var countdownInterval = setInterval(function () {
+                seconds--;
+                countdownElement.textContent = seconds;
+                if (seconds &lt;= 0) {
+                    clearInterval(countdownInterval);
+                }
+            }, 1000);
+        </script>
+    </h:body>
+</html>

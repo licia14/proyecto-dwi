@@ -1,0 +1,67 @@
+
+
+.asignacion-info, .actividad-form {
+    margin: 1rem auto;
+    padding: 1rem;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #456268;
+    margin-bottom: 1rem;
+}
+
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button, input[type="submit"] {
+    background-color: #456268;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #345054;
+}
+
+/**/
+.actividad-tabla .table-container {
+    width: 80%; /* Ajustar ancho de la tabla al 80% */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+
+.actividad-tabla .table {
+    width: 80%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.actividad-tabla .table th {
+    background-color: #79A3B1; /* Color del encabezado */
+    color: white;
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #D0E8F2; /* bordes entre tablas  */
+}
+
+.actividad-tabla .table td {
+    padding: 8px;
+    border: 1px solid #D0E8F2;
+}
+
+.actividad-tabla .table tr:hover {
+    background-color: #D0E8F2; /* Hover */
+    color: black;
+}

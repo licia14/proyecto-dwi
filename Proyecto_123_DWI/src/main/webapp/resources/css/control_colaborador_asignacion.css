@@ -1,0 +1,118 @@
+/* Main Container */
+.main-container {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Section Styles */
+.section {
+    margin: 20px 0;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    border: 1px solid #79A3B1;
+}
+
+.section h2 {
+    text-align: center;
+    color: #456268;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #79A3B1;
+}
+
+.table th {
+    background-color: #79A3B1;
+    color: white;
+}
+
+.table tr {
+    background-color: white;
+}
+
+.table tr:hover {
+    background-color: #EAF6F8; /* Celeste pálido */
+}
+
+.table tr.selected-row {
+    background-color: #D0E8F2; /* Celeste fuerte */
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* Button Styles */
+.action-button {
+    background-color: #79A3B1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #456268;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #20393e;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 2px solid #79A3B1;
+    font-size: 12px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Buttons: Save and Cancel */
+.button-save {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.button-save:hover {
+    background-color: #45a049;
+}
+
+.button-cancel {
+    background-color: #f44336; /* Red */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-cancel:hover {
+    background-color: #d32f2f;
+}

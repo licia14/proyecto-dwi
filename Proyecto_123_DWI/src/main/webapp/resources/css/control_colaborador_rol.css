@@ -1,0 +1,125 @@
+
+/* Contenedor principal para roles */
+.roles-page {
+    margin: 20px auto; /* Margen superior e inferior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    max-width: 1200px; /* Ancho máximo del contenido */
+    background-color: #fff; /* Fondo blanco */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+/* Títulos */
+.form-title {
+    font-size: 1.25rem; /* Tamaño de fuente */
+    font-weight: 600; /* Negrita */
+    margin-bottom: 1rem; /* Espaciado inferior */
+    color: #374151; /* Color del texto */
+    text-align: center; /* Centrar el título */
+}
+
+/* Contenedor del formulario */
+.roles-container {
+    padding: 20px; /* Espaciado interno */
+    background-color: #f9fafb; /* Fondo claro */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    border: 1px solid #e5e7eb; /* Borde gris claro */
+}
+
+/* Etiquetas */
+.form-label {
+    display: block; /* Etiqueta como bloque */
+    font-weight: bold; /* Negrita */
+    color: #374151; /* Color del texto */
+    margin-bottom: 0.5rem; /* Espaciado inferior */
+}
+
+/* Campos de texto */
+.form-input,
+.form-textarea {
+    display: block; /* Alineación en bloque */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 0.5rem; /* Espaciado interno */
+    border: 1px solid #d1d5db; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    outline: none; /* Elimina el borde azul por defecto */
+    box-sizing: border-box; /* Ajuste del tamaño del contenido */
+    transition: border-color 0.3s; /* Transición suave al enfocarse */
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #3b82f6; /* Color azul al enfocarse */
+}
+
+/* Textarea adicional */
+.form-textarea {
+    resize: none; /* Desactiva el redimensionamiento manual */
+}
+
+/* Mensajes de error */
+.form-error {
+    color: #ef4444; /* Color rojo */
+    font-size: 0.875rem; /* Tamaño pequeño */
+    margin-top: 0.5rem; /* Espaciado superior */
+}
+
+/* Contenedor de botones */
+.form-buttons {
+    display: flex; /* Alineación horizontal de los botones */
+    justify-content: flex-end; /* Botones alineados a la derecha */
+    gap: 1rem; /* Espaciado entre los botones */
+    margin-top: 1rem; /* Espaciado superior */
+}
+
+/* Botones */
+.button {
+    padding: 0.5rem 1rem; /* Espaciado interno */
+    border-radius: 4px; /* Bordes redondeados */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cursor de mano */
+    color: white; /* Texto blanco */
+    transition: background-color 0.3s; /* Transición suave al pasar el mouse */
+}
+
+.button-save {
+    background-color: #3b82f6; /* Azul */
+}
+
+.button-save:hover {
+    background-color: #2563eb; /* Azul más oscuro al pasar el mouse */
+}
+
+.button-update {
+    background-color: #10b981; /* Verde */
+}
+
+.button-update:hover {
+    background-color: #059669; /* Verde más oscuro al pasar el mouse */
+}
+
+.button-cancel {
+    background-color: #6b7280; /* Gris */
+}
+
+.button-cancel:hover {
+    background-color: #4b5563; /* Gris más oscuro al pasar el mouse */
+}
+
+/* Contenedor de la tabla */
+.table-container {
+    margin-top: 20px; /* Espaciado superior para separar la tabla del formulario */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    border: 1px solid #e5e7eb; /* Borde gris claro */
+    background-color: #fff; /* Fondo blanco */
+}
+
+/* Títulos de tabla */
+h2 {
+    text-align: center; /* Centrado */
+    margin-bottom: 20px; /* Espaciado inferior */
+    color: #456268; /* Color del texto */
+}

@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Dashboard - Gráficos</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <h:outputStylesheet library="css" name="control_colaborador_styles.css" />
+    <style>
+        .chart-container {
+            max-width: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</h:head>
+<h:body>
+    <!-- Encabezado y navegación -->
+    <header class="header">
+                <!-- Barra Superior -->
+            <div class="top-bar">
+                <!-- Logo -->
+                <div class="logo">
+                    <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" />
+                    <!-- Barra de Navegación -->
+                    <nav class="nav-simple">
+                        <ul>
+                            <li><a href="#{request.contextPath}/faces/colaborador/perfil_colaborador.xhtml">Mi Perfil</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Información del Usuario -->
+                <h:form id="cerrarSesionForm">
+                    <div class="user-info">
+                        <h:panelGroup rendered="#{colaboradorSesionBean.colaboradorAutenticado}">
+                            <span>Bienvenido, #{colaboradorSesionBean.colaborador.nombreColaborador}</span>
+                            <h:commandLink value="Cerrar Sesión" action="#{loginBean.cerrarSesion}" />
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Barra de Navegación -->
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#{request.contextPath}/faces/colaborador/portal_colaborador.xhtml">Inicio</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_cliente.xhtml">Clientes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_colaborador.xhtml">Colaboradores</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_dashboard.xhtml">Dashboard</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_solicitud.xhtml">Solicitudes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_asignacion.xhtml">Asignaciones</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_actividad.xhtml">Actividades</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_rol.xhtml">Rol</a></li>
+                </ul>
+            </nav>
+    </header>
+    
+    <center><h1>Dashboard</h1></center>
+
+    <!-- Gráfico Circular -->
+    <h2>Gráfico Circular (Solicitudes por Estado)</h2>
+    <div class="chart-container">
+        <canvas id="pieChart"></canvas>
+    </div>
+    <br/><br/>
+    <!-- Gráfico de Barras -->
+    <h:form>
+        <h2>Gráfico de Barras</h2>
+        <center>
+        <h:selectOneMenu value="#{dashboardBean.tipoGrafico}" onchange="submit()">
+            <f:selectItem itemValue="mes" itemLabel="Solicitudes por Mes" />
+            <f:selectItem itemValue="anio" itemLabel="Solicitudes por Año" />
+        </h:selectOneMenu>
+        </center>
+    </h:form>
+    <div class="chart-container">
+        <canvas id="barChart"></canvas>
+    </div>
+    <br/><br/><br/>
+    <footer class="footer">
+        <p>&#169;copy; 2024 123digit@l. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Gráfico Circular
+            try {
+                const pieData = JSON.parse('#{dashboardBean.pieChartData}');
+                const pieCtx = document.getElementById("pieChart").getContext("2d");
+                new Chart(pieCtx, {
+                    type: 'pie',
+                    data: pieData,
+                });
+            } catch (e) {
+                console.error("Error al procesar el gráfico circular:", e);
+            }
+
+            // Gráfico de Barras
+            try {
+                const barData = JSON.parse('#{dashboardBean.barChartData}');
+                const barCtx = document.getElementById("barChart").getContext("2d");
+                new Chart(barCtx, {
+                    type: 'bar',
+                    data: barData,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: true, position: 'top' }
+                        },
+                        scales: {
+                            x: { title: { display: true, text: 'Meses/Años' } },
+                            y: { beginAtZero: true, title: { display: true, text: 'Cantidad de Solicitudes' } }
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error("Error al procesar el gráfico de barras:", e);
+            }
+        });
+    </script>
+</h:body>
+</html>

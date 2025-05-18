@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Control de Actividades</title>
+    <h:outputStylesheet library="css" name="control_colaborador_actividad.css"/>
+    <h:outputStylesheet library="css" name="control_colaborador_styles.css"/>
+</h:head>
+<h:body>
+    <!-- Encabezado y navegación -->
+    <header class="header">
+                <!-- Barra Superior -->
+            <div class="top-bar">
+                <!-- Logo -->
+                <div class="logo">
+                    <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" />
+                    <!-- Barra de Navegación -->
+                    <nav class="nav-simple">
+                        <ul>
+                            <li><a href="#{request.contextPath}/faces/colaborador/perfil_colaborador.xhtml">Mi Perfil</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Información del Usuario -->
+                <h:form id="cerrarSesionForm">
+                    <div class="user-info">
+                        <h:panelGroup rendered="#{colaboradorSesionBean.colaboradorAutenticado}">
+                            <span>Bienvenido, #{colaboradorSesionBean.colaborador.nombreColaborador}</span>
+                            <h:commandLink value="Cerrar Sesión" action="#{loginBean.cerrarSesion}" />
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Barra de Navegación -->
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#{request.contextPath}/faces/colaborador/portal_colaborador.xhtml">Inicio</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_cliente.xhtml">Clientes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_colaborador.xhtml">Colaboradores</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_dashboard.xhtml">Dashboard</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_solicitud.xhtml">Solicitudes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_asignacion.xhtml">Asignaciones</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_actividad.xhtml">Actividades</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_rol.xhtml">Rol</a></li>
+                </ul>
+            </nav>
+    </header>
+    <br/><br/>
+    <br/><br/>
+    <!-- Información de la Asignación Seleccionada -->
+    <div class="asignacion-info">
+        <h2>Asignación Seleccionada</h2>
+        <p><strong>ID Asignación:</strong> #{actividadBean.asignacionSeleccionada.idAsignacion}</p>
+        <p><strong>ID Solicitud:</strong> #{actividadBean.solicitudSeleccionada.idSolicitud}</p>
+        <p><strong>Motivo:</strong> #{actividadBean.solicitudSeleccionada.motivo}</p>
+        <p><strong>Detalles:</strong> #{actividadBean.solicitudSeleccionada.detalles}</p>
+        <p><strong>Coordinador:</strong> #{actividadBean.asignacionCoordinador.colaborador.nombreColaborador}</p>
+    </div>
+    <br/><br/>
+
+    <!-- Formulario para registrar nueva actividad -->
+    <div class="actividad-form">
+        <h2>Crear Nueva Actividad</h2>
+        <h:form id="formNuevaActividad">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Descripción:" for="descripcion"/>
+                <h:inputTextarea id="descripcion" value="#{actividadBean.nuevaActividad.descripcion}" 
+                                 required="true" requiredMessage="La descripción es obligatoria."/>
+                <h:outputLabel value="Tiempo estimado (minutos):" for="tiempo"/>
+                <h:inputText id="tiempo" value="#{actividadBean.nuevaActividad.tiempoRequerido}" 
+                             required="true" requiredMessage="El tiempo estimado es obligatorio."/>
+                <h:commandButton value="Guardar Actividad" action="#{actividadBean.guardarActividad}">
+                    <f:ajax execute="@form" render="tablaActividades mensaje"/>
+                </h:commandButton>
+            </h:panelGrid>
+            <h:messages id="mensaje" globalOnly="true" style="color: red;"/>
+        </h:form>
+    </div>
+    <br/><br/>
+    
+    <!-- Tabla de actividades -->
+    <div class="actividad-tabla">
+        <h2>Lista de Actividades</h2>
+        <h:panelGroup rendered="#{empty actividadBean.actividades}">
+            <center><p>No se encontraron actividades para esta solicitud.</p></center>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{not empty actividadBean.actividades}">
+            <h:dataTable id="tablaActividades" value="#{actividadBean.actividades}" var="actividad" styleClass="table">
+                <h:column>
+                    <f:facet name="header">Descripción</f:facet>
+                    #{actividad.descripcion}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Tiempo (Horas)</f:facet>
+                    <h:outputText value="#{actividad.tiempoRequerido / 60}">
+                        <f:convertNumber maxFractionDigits="1" />
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fecha Registro</f:facet>
+                    #{actividadBean.formatearFecha(actividad.fechaRegistro)}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Responsable</f:facet>
+                    #{actividad.colaborador.nombreColaborador}
+                </h:column>
+            </h:dataTable>
+            <br/>
+            <!-- Botón para finalizar solicitud -->
+            <center>
+            <h:form id="formFinalizar">
+                <h:commandButton value="Finalizar Solicitud" action="#{actividadBean.finalizarSolicitud}" 
+                                 rendered="#{actividadBean.esCoordinador()}">
+                </h:commandButton>
+            </h:form>
+            </center>
+        </h:panelGroup>
+    </div>
+    
+    
+    <h:dataTable value="#{actividadBean.solicitudSeleccionada}" var="solicitud">
+    <h:column>
+        <f:facet name="header">ID Solicitud</f:facet>
+        #{solicitud.idSolicitud}
+    </h:column>
+    <h:column>
+        <f:facet name="header">Cliente</f:facet>
+        #{solicitud.cliente.nombreCliente}
+    </h:column>
+    <h:column>
+        <f:facet name="header">Correo del Cliente</f:facet>
+        #{actividadBean.obtenerCorreoCliente(solicitud)}
+    </h:column>
+</h:dataTable>
+    <br/><br/>
+    <br/><br/>
+    <br/><br/>
+    <!-- Footer -->
+    <footer>
+        <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+    </footer>
+</h:body>
+</html>

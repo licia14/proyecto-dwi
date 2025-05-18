@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control de Solicitudes</title>
+    <h:outputStylesheet library="css" name="control_colaborador_styles.css" />
+    <h:outputStylesheet library="css" name="control_colaborador_solicitud.css" />
+</h:head>
+<h:body>
+    <!-- Encabezado y navegación -->
+    <header class="header">
+                <!-- Barra Superior -->
+            <div class="top-bar">
+                <!-- Logo -->
+                <div class="logo">
+                    <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" />
+                    <!-- Barra de Navegación -->
+                    <nav class="nav-simple">
+                        <ul>
+                            <li><a href="#{request.contextPath}/faces/colaborador/perfil_colaborador.xhtml">Mi Perfil</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Información del Usuario -->
+                <h:form id="cerrarSesionForm">
+                    <div class="user-info">
+                        <h:panelGroup rendered="#{colaboradorSesionBean.colaboradorAutenticado}">
+                            <span>Bienvenido, #{colaboradorSesionBean.colaborador.nombreColaborador}</span>
+                            <h:commandLink value="Cerrar Sesión" action="#{loginBean.cerrarSesion}" />
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Barra de Navegación -->
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#{request.contextPath}/faces/colaborador/portal_colaborador.xhtml">Inicio</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_cliente.xhtml">Clientes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_colaborador.xhtml">Colaboradores</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_dashboard.xhtml">Dashboard</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_solicitud.xhtml">Solicitudes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_asignacion.xhtml">Asignaciones</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_actividad.xhtml">Actividades</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_rol.xhtml">Rol</a></li>
+                </ul>
+            </nav>
+    </header>
+    <br/><br/>
+
+    <!-- Visualización de Solicitudes -->
+    <h1 style="text-align: center; color: #456268;">Visualización de Solicitudes</h1>
+
+    <div class="accordion-container">
+        <!-- Bloque para solicitudes pendientes -->
+        <div>
+            <h3 class="accordion-header" onclick="toggleAccordion(this)">Solicitudes Pendientes</h3>
+            <div class="accordion-content">
+                <h:dataTable value="#{solicitudColaboradorBean.solicitudesPendientes}" var="solicitud" styleClass="table">
+                    <h:column>
+                        <f:facet name="header">ID Solicitud</f:facet>
+                        #{solicitud.idSolicitud}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Nro Solicitud</f:facet>
+                        #{solicitud.nroSolicitud}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Cliente</f:facet>
+                        #{solicitud.cliente.nombreCliente}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Motivo</f:facet>
+                        #{solicitud.motivo}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Estado</f:facet>
+                        #{solicitud.estado}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Fecha Registro</f:facet>
+                        #{solicitudColaboradorBean.formatearFecha(solicitud.fechaRegistro)}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Fecha Finalizacion</f:facet>
+                        #{solicitudColaboradorBean.formatearFecha(solicitud.fechaFinalizacion)}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </div>
+
+        <!-- Bloque para solicitudes en proceso -->
+        <div>
+            <h3 class="accordion-header" onclick="toggleAccordion(this)">Solicitudes En Proceso</h3>
+            <div class="accordion-content">
+                <h:dataTable value="#{solicitudColaboradorBean.solicitudesEnProceso}" var="solicitud" styleClass="table">
+                    <h:column>
+                        <f:facet name="header">ID Solicitud</f:facet>
+                        #{solicitud.idSolicitud}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Cliente</f:facet>
+                        #{solicitud.cliente.nombreCliente}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Motivo</f:facet>
+                        #{solicitud.motivo}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Estado</f:facet>
+                        #{solicitud.estado}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Fecha Registro</f:facet>
+                        #{solicitudColaboradorBean.formatearFecha(solicitud.fechaRegistro)}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Fecha Finalizacion</f:facet>
+                        #{solicitudColaboradorBean.formatearFecha(solicitud.fechaFinalizacion)}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </div>
+
+        <!-- Bloque para solicitudes finalizadas -->
+        <div>
+            <h3 class="accordion-header" onclick="toggleAccordion(this)">Solicitudes Finalizadas</h3>
+            <div class="accordion-content">
+                <h:dataTable value="#{solicitudColaboradorBean.solicitudesFinalizadas}" var="solicitud" styleClass="table">
+                    <h:column>
+                        <f:facet name="header">ID Solicitud</f:facet>
+                        #{solicitud.idSolicitud}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Cliente</f:facet>
+                        #{solicitud.cliente.nombreCliente}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Motivo</f:facet>
+                        #{solicitud.motivo}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Estado</f:facet>
+                        #{solicitud.estado}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Fecha Registro</f:facet>
+                        #{solicitudColaboradorBean.formatearFecha(solicitud.fechaRegistro)}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Fecha Finalizacion</f:facet>
+                        #{solicitudColaboradorBean.formatearFecha(solicitud.fechaFinalizacion)}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </div>
+    </div>
+
+    <br/><br/>
+    
+    <div> 
+    <h2>Solicitudes Pendientes</h2> 
+    <h:form id="formSolicitudes"> 
+        <h:dataTable value="#{solicitudColaboradorBean.solicitudesPendientes}" var="solicitud" styleClass="table">
+            <h:column>
+                <f:facet name="header">ID Solicitud</f:facet>
+                #{solicitud.idSolicitud}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nro Solicitud</f:facet>
+                #{solicitud.nroSolicitud}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Cliente</f:facet>
+                #{solicitud.cliente.nombreCliente}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Motivo</f:facet>
+                #{solicitud.motivo}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Estado</f:facet>
+                #{solicitud.estado}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Fecha Registro</f:facet>
+                #{solicitudColaboradorBean.formatearFecha(solicitud.fechaRegistro)}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Fecha Finalizacion</f:facet>
+                #{solicitudColaboradorBean.formatearFecha(solicitud.fechaFinalizacion)}
+            </h:column>
+            <!-- Nueva columna para el botón Asignar -->
+            <h:column>
+                <f:facet name="header">Acción</f:facet>
+                <h:commandButton value="Asignar" action="control_asignacion.xhtml?faces-redirect=true">
+                   <f:setPropertyActionListener target="#{asignacionBean.solicitudSeleccionada}" value="#{solicitud}" />
+                </h:commandButton>
+            </h:column>
+        </h:dataTable>
+    </h:form>    
+    </div>
+    <br/><br/><br/>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleAccordion(element) {
+            document.querySelectorAll('.accordion-content').forEach(content => {
+                if (content.previousElementSibling !== element) {
+                    content.style.maxHeight = '0';
+                    content.previousElementSibling.classList.remove('active');
+                }
+            });
+            const content = element.nextElementSibling;
+            if (content.style.maxHeight &amp;&amp; content.style.maxHeight !== '0px') {
+                content.style.maxHeight = '0';
+                element.classList.remove('active');
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                element.classList.add('active');
+            }
+        }
+    </script>
+</h:body>
+</html>

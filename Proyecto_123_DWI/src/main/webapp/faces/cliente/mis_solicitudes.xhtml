@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Mis Solicitudes</title>
+    <h:outputStylesheet library="css" name="styles.css" />
+    <h:outputStylesheet library="css" name="control_cliente_styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+</h:head>
+<h:body>
+    <!-- Cabecera -->
+    <header class="bg-blue-500 p-4 text-black flex justify-between items-center">
+        <!-- Logo y navegación -->
+        <div class="flex items-center space-x-4">
+            <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" styleClass="w-16 h-16" />
+            <nav class="flex space-x-4">
+                <h:link outcome="/faces/cliente/portal_cliente.xhtml" value="Inicio" styleClass="hover:text-gray-700 font-bold" />
+                <h:link outcome="/faces/cliente/mis_solicitudes.xhtml" value="Mis Solicitudes" styleClass="hover:text-gray-700 font-bold" />
+                <h:link outcome="/faces/cliente/perfil_cliente.xhtml" value="Mi Perfil" styleClass="hover:text-gray-700 font-bold" />
+                <h:link outcome="/faces/cliente/contacto_cliente.xhtml" value="Contacto" styleClass="hover:text-gray-700 font-bold" />
+            </nav>
+        </div>
+
+        <!-- Información del cliente -->
+        <h:form id="cerrarSesionForm">
+            <div class="flex items-center space-x-4">
+                <h:panelGroup rendered="#{clienteSesionBean.clienteAutenticado}">
+                    <span class="font-bold">Bienvenido, #{clienteSesionBean.cliente.nombreCliente} | </span>
+                    <h:commandLink value="Cerrar Sesión" 
+                                   action="#{loginBean.cerrarSesion}" 
+                                   immediate="true" 
+                                   styleClass="text-white-600 hover:underline" />
+                </h:panelGroup>
+            </div>
+        </h:form>
+    </header>
+    
+
+    <h1>Mis Solicitudes</h1>
+
+    <!-- Mensajes -->
+    <h:messages globalOnly="true" style="color: red;" />
+    
+    <!-- Botón para crear solicitud  -->
+    <div class="button-crear">
+        <h:form>
+            <center><h:commandButton value="Crear Nueva Solicitud" action="crear_solicitud.xhtml?faces-redirect=true" styleClass="custom-button" /></center>
+        </h:form>
+    </div>
+    <br/><br/>
+
+    <!-- Tabla de solicitudes -->
+    <h:form id="formMisSolicitudes">
+        <h:dataTable value="#{solicitudClienteBean.solicitudesCliente}" var="solicitud" border="1">
+            <h:column>
+                <f:facet name="header">Nro Solicitud</f:facet>
+                #{solicitud.nroSolicitud}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Motivo</f:facet>
+                #{solicitud.motivo}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Detalles</f:facet>
+                #{solicitud.detalles}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Estado</f:facet>
+                #{solicitud.estado}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Fecha Registro</f:facet>
+                #{solicitudClienteBean.formatearFecha(solicitud.fechaRegistro)}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Fecha Finalización</f:facet>
+                #{solicitud.fechaFinalizacion != null ? solicitud.fechaFinalizacion : '-'}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Imagen</f:facet>
+                <h:graphicImage value="#{solicitud.imagen}" alt="No disponible" width="100" height="100" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+   
+    <br/><br/>
+     <!-- Footer -->
+    <footer class="footer">
+        <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+    </footer>
+     
+    <style>
+        /* Estilo para el h1 */
+h1 {
+    font-size: 2.5rem; /* Tamaño grande y legible */
+    font-weight: bold; /* Texto negrita */
+    text-align: center; /* Centrado horizontalmente */
+    color: #1a202c; /* Color oscuro */
+    margin: 20px 0; /* Separación vertical */
+}
+
+/* Estilo para el botón */
+h:commandButton[value="Crear Nueva Solicitud"] {
+    display: block; /* Botón como bloque para centrarlo fácilmente */
+    margin: 20px auto; /* Centrado horizontal y separación vertical */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de fuente legible */
+    background-color: #007bff; /* Azul claro */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Manito al pasar el mouse */
+    transition: background-color 0.3s ease; /* Animación al pasar el mouse */
+}
+
+/* Estilo para hover (pasar el mouse) */
+h:commandButton[value="Crear Nueva Solicitud"]:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+}
+    </style>
+</h:body>
+</html>

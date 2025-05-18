@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+   
+    <!-- Configuración de FacesServlet -->
+    <servlet>
+        <servlet-name>FacesServlet</servlet-name>
+        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>FacesServlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+
+    <!-- Configuración de archivo de bienvenida -->
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+
+    <!-- Configuración de tiempo de sesión -->
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    
+    
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>pe.edu.utp.isi.dwi.proyecto_123_dwi.filters.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/faces/cliente/*</url-pattern>
+        <url-pattern>/faces/colaborador/*</url-pattern>
+    </filter-mapping>
+    
+    
+    
+
+    
+    <!-- <context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Development</param-value>
+</context-param>
+-->
+
+
+    <!-- Configuración de seguridad (opcional) -->
+    <!--
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>SecureArea</web-resource-name>
+            <url-pattern>/secure/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    -->
+</web-app>

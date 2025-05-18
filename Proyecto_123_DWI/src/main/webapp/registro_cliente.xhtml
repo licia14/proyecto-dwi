@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Registro de Cliente</title>
+        <h:outputStylesheet library="css" name="registro_cliente.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&amp;display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    </h:head>
+    <h:body class="bg-gray-100">
+
+        <!-- Header -->
+        <header class="bg-blue-600 p-4 text-white flex justify-between items-center">
+            <div class="flex items-center">
+                <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" styleClass="w-12 h-12 mr-4" />
+                <h1 class="text-2xl font-bold">123digit@l</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><h:link outcome="/index.xhtml" value="Inicio" styleClass="hover:text-gray-300" /></li>
+                    <li><h:link outcome="/registro_cliente.xhtml" value="Regístrese" styleClass="hover:text-gray-300" /></li>
+                    <li><h:link outcome="/login.xhtml" value="Iniciar Sesión" styleClass="hover:text-gray-300" /></li>
+                </ul>
+            </nav>
+        </header>
+        <br></br>
+
+        <!-- Contenido principal -->
+        <main class="max-w-lg mx-auto mt-10 bg-white p-6 rounded shadow">
+            <h2 class="text-3xl font-bold text-center mb-6">Registrar Nuevo Cliente</h2>
+                
+            <h:form enctype="multipart/form-data">
+                <h:outputLabel value="Nombre de la Entidad: " />
+                <h:inputText value="#{clienteRegistroBean.cliente.nombreEntidad}" />
+
+                <h:outputLabel value="Nombre del Cliente: " />
+                <h:inputText value="#{clienteRegistroBean.cliente.nombreCliente}" />
+
+                <h:outputLabel value="Tipo de Documento: " />
+                <h:selectOneMenu value="#{clienteRegistroBean.cliente.tipoDocumento}" required="true" requiredMessage="Debe seleccionar un tipo de documento">
+                    <f:selectItem itemLabel="Seleccione" itemValue="" />
+                    <f:selectItem itemLabel="DNI" itemValue="DNI" />
+                    <f:selectItem itemLabel="RUC" itemValue="RUC" />
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Número de Documento: " />
+                <h:inputText value="#{clienteRegistroBean.cliente.numDocumento}" required="true" requiredMessage="Debe ingresar el número de documento" />
+
+                <h:outputLabel value="Correo: " />
+                <h:inputText value="#{clienteRegistroBean.cliente.correo}" />
+                <!-- Reglas del Correo Electrónico -->
+                <p class="text-sm text-gray-600 mt-2">
+                    El correo electrónico debe cumplir las siguientes reglas:
+                    <br>- Debe tener un formato válido (por ejemplo: usuario@dominio.com).</br>
+                    <br>- Puede incluir letras, números, puntos, guiones y el símbolo '+'.</br>
+                    <br>- Debe contener el símbolo '@' y un dominio válido (por ejemplo: gmail.com).</br>
+                </p>
+
+                <h:outputLabel value="Contraseña: " />
+                <h:inputSecret value="#{clienteRegistroBean.cliente.contrasena}" />
+                <!-- Reglas de la Contraseña -->
+                <p class="text-sm text-gray-600 mt-2">
+                    La contraseña debe cumplir las siguientes reglas:
+                    <br>- Al menos 8 caracteres.</br>
+                    - Al menos una letra mayúscula.
+                    <br>- Al menos un número.</br>
+                    - Al menos un carácter especial (por ejemplo: @$!%*?&amp;).
+                    <br></br>
+                    <br></br>
+                </p>
+                
+                <h:outputLabel value="Confirmar Contraseña: " />
+                <h:inputSecret value="#{clienteRegistroBean.confirmarContrasena}" />
+                
+                <h:outputLabel value="Dirección: " />
+                <h:inputText value="#{clienteRegistroBean.cliente.direccion}" />
+
+                <h:outputLabel value="Teléfono: " />
+                <h:inputText value="#{clienteRegistroBean.cliente.telefono}" />
+
+                <h:outputLabel value="Foto de Perfil: " />
+                <h:inputFile value="#{clienteRegistroBean.fotoPerfil}" />
+
+                <h:commandButton value="Registrar" action="#{clienteRegistroBean.registrarCliente}" />
+            </h:form>  
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-6 mt-20 text-center">
+            <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+            <p>Tu socio en soluciones de software innovadoras.</p>
+        </footer>
+    </h:body>
+</html>

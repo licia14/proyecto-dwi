@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>123digit@l - Plataforma</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&amp;display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    </h:head>
+    <h:body class="bg-gray-100">
+
+        <!-- Header -->
+        <header class="bg-blue-600 p-4 text-white flex justify-between items-center">
+            <div class="flex items-center">
+                <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" styleClass="w-12 h-12 mr-4" />
+                <h1 class="text-2xl font-bold">123digit@l</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><h:link outcome="/index.xhtml" value="Inicio" styleClass="hover:text-gray-300" /></li>
+                    <li><h:link outcome="/registro_cliente.xhtml" value="Regístrese" styleClass="hover:text-gray-300" /></li>
+                    <li><h:link outcome="/login.xhtml" value="Iniciar Sesión" styleClass="hover:text-gray-300" /></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="bg-blue-500 text-white py-20 text-center">
+            <h2 class="text-4xl font-bold">Bienvenidos a 123digit@l</h2>
+            <p class="mt-4 text-lg">Soluciones innovadoras en software para tu empresa</p><br />
+            <h:link outcome="/faces/cliente/registro_cliente.xhtml" value="Regístrate Ahora" styleClass="bg-white text-blue-500 px-4 py-2 rounded-md shadow-md hover:bg-gray-100" />
+        </section>
+
+        <!-- Main content -->
+        <main class="container mx-auto mt-10">
+            <section class="text-center mb-20">
+                <h3 class="text-3xl font-semibold mb-4">¿Qué hacemos?</h3>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+                    En 123digit@l, ofrecemos una plataforma completa para la gestión de usuarios, solicitudes, asignaciones y actividades,
+                    especialmente diseñada para optimizar el flujo de trabajo en empresas de software. Nuestra meta es proporcionarte herramientas
+                    eficaces para la automatización de procesos y la mejora continua.
+                </p>
+            </section>
+
+            <!-- Features Section -->
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+                <div class="p-6 bg-white rounded-lg shadow-lg">
+                    <i class="fas fa-users text-4xl text-blue-500"></i>
+                    <h4 class="text-xl font-bold mt-4">Gestión de Usuarios</h4>
+                    <p class="mt-2 text-gray-600">Administra usuarios de manera eficiente y fácil con nuestra plataforma.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-lg">
+                    <i class="fas fa-file-alt text-4xl text-blue-500"></i>
+                    <h4 class="text-xl font-bold mt-4">Gestión de Solicitudes</h4>
+                    <p class="mt-2 text-gray-600">Gestiona y organiza todas las solicitudes de tus clientes.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-lg">
+                    <i class="fas fa-tasks text-4xl text-blue-500"></i>
+                    <h4 class="text-xl font-bold mt-4">Asignación de Actividades</h4>
+                    <p class="mt-2 text-gray-600">Asigna tareas y gestiona actividades de forma ordenada y eficaz.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-lg">
+                    <i class="fas fa-chart-line text-4xl text-blue-500"></i>
+                    <h4 class="text-xl font-bold mt-4">Reportes y Estadísticas</h4>
+                    <p class="mt-2 text-gray-600">Genera reportes detallados para análisis y toma de decisiones.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-6 mt-20 text-center">
+            <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+            <p>Tu socio en soluciones de software innovadoras.</p>
+        </footer>
+    </h:body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Crear Asignación</title>
+    <h:outputStylesheet library="css" name="control_colaborador_styles.css" />
+    <h:outputStylesheet library="css" name="control_colaborador_asignacion.css" />
+</h:head>
+<h:body>
+    <!-- Encabezado y navegación -->
+    <header class="header">
+                <!-- Barra Superior -->
+            <div class="top-bar">
+                <!-- Logo -->
+                <div class="logo">
+                    <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" />
+                    <!-- Barra de Navegación -->
+                    <nav class="nav-simple">
+                        <ul>
+                            <li><a href="#{request.contextPath}/faces/colaborador/perfil_colaborador.xhtml">Mi Perfil</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Información del Usuario -->
+                <h:form id="cerrarSesionForm">
+                    <div class="user-info">
+                        <h:panelGroup rendered="#{colaboradorSesionBean.colaboradorAutenticado}">
+                            <span>Bienvenido, #{colaboradorSesionBean.colaborador.nombreColaborador}</span>
+                            <h:commandLink value="Cerrar Sesión" action="#{loginBean.cerrarSesion}" />
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </div>
+
+            <!-- Barra de Navegación -->
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#{request.contextPath}/faces/colaborador/portal_colaborador.xhtml">Inicio</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_cliente.xhtml">Clientes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_colaborador.xhtml">Colaboradores</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_dashboard.xhtml">Dashboard</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_solicitud.xhtml">Solicitudes</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_asignacion.xhtml">Asignaciones</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_actividad.xhtml">Actividades</a></li>
+                    <li><a href="#{request.contextPath}/faces/colaborador/control_rol.xhtml">Rol</a></li>
+                </ul>
+            </nav>
+    </header>
+    <br/>
+
+        <!-- Contenido principal -->
+        <main class="max-w-lg mx-auto mt-10 bg-white p-6 rounded shadow">
+            <h2 class="text-3xl font-bold text-center mb-6">Actualizar Información</h2>
+            
+                <h:form enctype="multipart/form-data">
+                <!-- Campos del formulario -->
+                <h:outputLabel value="Nombre del Colaborador:" />
+                <h:inputText value="#{colaboradorSesionBean.colaborador.nombreColaborador}" required="true" 
+                             requiredMessage="El nombre del colaborador es obligatorio" class="w-full mb-4" />
+
+                <h:outputLabel value="Apellidos del Colaborador:" />
+                <h:inputText value="#{colaboradorSesionBean.colaborador.apellidos}" required="true" 
+                             requiredMessage="Los apellidos del colaborador son obligatorios" class="w-full mb-4" />
+
+                <h:outputLabel value="DNI:" />
+                <h:inputText value="#{colaboradorSesionBean.colaborador.dni}" required="true" 
+                             requiredMessage="El DNI es obligatorio" class="w-full mb-4" />
+
+                <h:outputLabel value="Correo Electrónico:" />
+                <h:inputText value="#{colaboradorSesionBean.colaborador.correo}" required="true" 
+                             requiredMessage="El correo es obligatorio" class="w-full mb-4" />
+
+                <h:outputLabel value="Teléfono:" />
+                <h:inputText value="#{colaboradorSesionBean.colaborador.telefono}" class="w-full mb-4" />
+
+                <h:outputLabel value="Dirección:" />
+                <h:inputText value="#{colaboradorSesionBean.colaborador.direccion}" class="w-full mb-4" />
+
+                <h:outputLabel value="Fecha de Registro:" />
+                <h:outputText value="#{colaboradorSesionBean.colaborador.fechaRegistro}" class="w-full mb-4 text-gray-500" />
+
+                <h:outputLabel value="Rol:" />
+                <h:outputText value="#{colaboradorSesionBean.colaborador.rol.nombreRol}" class="w-full mb-4 text-gray-500" />
+
+                <h:outputLabel value="Actualizar Foto de Perfil (opcional):" />
+                <h:inputFile value="#{colaboradorSesionBean.fotoPerfil}" class="w-full mb-4" />
+
+                <!-- Contraseña -->
+                <h:outputLabel value="Nueva Contraseña (opcional):" />
+                <h:inputSecret value="#{colaboradorSesionBean.nuevaContrasena}" class="w-full mb-4" />
+
+                <!-- Botón para guardar cambios -->
+                <div class="text-center mt-6">
+                    <h:commandButton value="Actualizar Datos" action="#{colaboradorSesionBean.actualizarDatos}" 
+                                     styleClass="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700" />
+                </div>
+            </h:form>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-6 mt-20 text-center">
+            <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+            <p>Tu socio en soluciones de software innovadoras.</p>
+        </footer>
+    </h:body>
+</html>

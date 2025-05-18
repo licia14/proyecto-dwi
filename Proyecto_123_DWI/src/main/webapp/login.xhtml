@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <h:outputStylesheet library="css" name="styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+</h:head>
+<h:body class="bg-gray-100">
+    
+    <!-- Header -->
+        <header class="bg-blue-600 p-4 text-white flex justify-between items-center">
+            <div class="flex items-center">
+                <h:graphicImage library="images" name="logo_empresa.png" alt="Logo Empresa" styleClass="w-12 h-12 mr-4" />
+                <h1 class="text-2xl font-bold">123digit@l</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><h:link outcome="/index.xhtml" value="Inicio" styleClass="hover:text-gray-300" /></li>
+                    <li><h:link outcome="/registro_cliente.xhtml" value="Regístrese" styleClass="hover:text-gray-300" /></li>
+                    <li><h:link outcome="/login.xhtml" value="Iniciar Sesión" styleClass="hover:text-gray-300" /></li>
+                </ul>
+            </nav>
+        </header>
+        <br></br>
+    
+    <!-- Contenedor principal -->
+    <div class="max-w-md mx-auto mt-20 bg-white p-6 rounded shadow-md">
+        <h2 class="text-3xl font-bold text-center mb-6">Iniciar Sesión</h2>
+        
+        <h:form>
+            <!-- Mostrar mensajes de error -->
+            <h:messages globalOnly="true" styleClass="text-red-500 text-sm mb-4" />
+
+            <!-- Correo Electrónico -->
+            <h:outputLabel for="correo" value="Correo Electrónico:" class="block text-gray-700 font-bold mb-2" />
+            <h:inputText id="correo" 
+                         value="#{loginBean.correo}" 
+                         styleClass="block w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" />
+            <h:message for="correo" styleClass="text-red-500 text-sm" />
+
+            <!-- Contraseña -->
+            <h:outputLabel for="contrasena" value="Contraseña:" class="block text-gray-700 font-bold mt-4 mb-2" />
+            <h:inputSecret id="contrasena" 
+                           value="#{loginBean.contrasena}" 
+                           styleClass="block w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" />
+            <h:message for="contrasena" styleClass="text-red-500 text-sm" />
+
+            <!-- Botón de Login -->
+            <div class="text-center mt-6">
+                <h:commandButton value="Iniciar Sesión" 
+                                 action="#{loginBean.iniciarSesion}" 
+                                 styleClass="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600" />
+            </div>
+
+            <!-- Enlace de registro -->
+            <div class="text-center mt-4">
+                <h:link outcome="/registro_cliente.xhtml" 
+                         value="¿No tienes cuenta? Regístrate aquí" 
+                         styleClass="text-blue-500 hover:underline" />
+            </div>
+        </h:form>
+    </div>
+    
+    <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-6 mt-20 text-center">
+            <p>&#169; 2024 123digit@l. Todos los derechos reservados.</p>
+            <p>Tu socio en soluciones de software innovadoras.</p>
+        </footer>
+</h:body>
+</html>
